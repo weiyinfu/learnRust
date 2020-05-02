@@ -1,12 +1,12 @@
 #[cfg(test)]
 mod ANDataTypeConvert {
-    use std::fmt::{Display, Formatter, Error};
+    use std::fmt::{Display, Formatter};
     use core::fmt;
     use std::str::FromStr;
 
     #[test]
     fn main() {
-        //不能把i32转成usize，不能把有符号转成无符号
+        //不能把i32转成usize，不能把有符号转成无符号，反之，则可
         let x = -1;
         println!("{}", x as usize);
         let y: usize = 1;

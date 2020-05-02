@@ -8,3 +8,4 @@ edition = "2018"
 
 [dependencies]
 ferris-says = "0.1"
+rand="0.3.14"

@@ -1,3 +1,6 @@
+/*
+Rust中的Enum非常重要，需要特别说明一下。
+*/
 #[cfg(test)]
 mod AEEnum {
     use std::mem::size_of_val;
@@ -15,7 +18,7 @@ mod AEEnum {
 
 
     #[test]
-    fn CstyleEnum() {
+    fn CStyleEnum() {
         //C语言风格的枚举
         // 该属性用于隐藏对未使用代码的警告。
         #![allow(dead_code)]
@@ -33,10 +36,6 @@ mod AEEnum {
             Green = 0x00ff00,
             Blue = 0x0000ff,
         }
-        //enum的值不能是字符串
-        // enum Planet{
-        //     earth="地球",
-        // }
 
         // `enum` 可以转成整形。
         println!("zero is {}", Number::Zero as i32);
@@ -56,5 +55,19 @@ mod AEEnum {
             User { name: String, age: i32 },
         }
         let x: Day = Day::User { name: "weiyinfu".to_string(), age: 12 };
+    }
+
+    #[test]
+    fn enumString() {
+        //enum的值也可以是字符串
+        enum Planet {
+            earth(String),
+            moon(String),
+        }
+        let x = Planet::earth("earth".to_string());
+        let y = Planet::moon("moon".to_string());
+        if let Planet::earth(value) = x {
+            println!("发现一个行星{}", value);
+        }
     }
 }

@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod AB {
-    use std::fmt::{Display, Formatter, Error, Pointer};
+    use std::fmt::{Display, Formatter};
     use std::fmt;
 
     #[test]
@@ -39,7 +39,7 @@ mod AB {
 
     #[test]
     fn otherFormat() {
-        /**
+        /*
         format用于格式化字符串
         eprint用于把格式化字符串打印到错误输出流
         */

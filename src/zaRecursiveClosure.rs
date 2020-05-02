@@ -68,13 +68,13 @@ mod baga {
         */
         struct Fact<'s> { f: &'s dyn Fn(&Fact, u32, u32) }
         let fact = Fact {
-            f: &|fact, x, y| if x == 0 { println!("{}",y) } else { (fact.f)(fact, x - 1, x * y) }
+            f: &|fact, x, y| if x == 0 { println!("{}", y) } else { (fact.f)(fact, x - 1, x * y) }
         };
 
         (fact.f)(&fact, 5, 1);
     }
 
-    /**
+    /*
     下面这种方式也是错误的。
     */
     // #[test]
@@ -83,10 +83,5 @@ mod baga {
     //     fac = |x: i32| { if x == 0 { 1 } else { x * fac(x - 1) } };
     //     println!("{}", fac(5));
     // }
-    #[test]
-    fn printTuple() {
-        for i in [(1, 2), (3, 4)].iter() {
-            println!("{:?}", i)
-        }
-    }
+
 }

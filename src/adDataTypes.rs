@@ -1,4 +1,5 @@
 #[cfg(test)]
+#[warn(non_camel_case_types)]
 mod ADDataTypes {
     use std::mem::size_of_val;
 
@@ -25,6 +26,39 @@ mod ADDataTypes {
         println!("char={}", size_of_val(&'魏'));
         println!("======bool值");
         println!("bool={}", size_of_val(&true));
+    }
+
+    #[test]
+    fn useListerals() {
+        //u8类型的字节字面量
+        let x = b'A';
+        println!("{}", x);
+        let x = 0x23;
+        println!("{:x}", x);
+        let x = 0o23;
+        println!("{:o}", x);
+        //使用更美观的字面量
+        let x = 0x232_342_34;
+        println!("{:x}", x);
+    }
+
+    #[test]
+    fn useTuple() {
+        let mut x = (1, 2, 3);
+        println!("{},{},{}", x.0, x.1, x.2);
+        //元组的解包
+        let (a, b, c) = x;
+        println!("{},{},{}", a, b, c);
+        //元组是可以改变值的(前提是元组必须是可变元组)，这一点与Python不同
+        x.0 = 100;
+        println!("{:?}", x)
+    }
+
+    #[test]
+    fn printTuple() {
+        for i in [(1, 2), (3, 4)].iter() {
+            println!("{:?}", i)
+        }
     }
 
     #[test]
@@ -77,6 +111,29 @@ mod ADDataTypes {
     }
 
     #[test]
+    fn deconstructStructure() {
+        struct Foo { x: (u32, u32), y: u32 }
+
+        // 解构结构体的成员
+        let foo = Foo { x: (1, 2), y: 3 };
+        let Foo { x: (a, b), y } = foo;
+
+        println!("a = {}, b = {},  y = {} ", a, b, y);
+
+        // 可以解构结构体并重命名变量，成员顺序并不重要
+
+        let Foo { y: i, x: j } = foo;
+        println!("i = {:?}, j = {:?}", i, j);
+
+        // 也可以忽略某些变量
+        let Foo { y, .. } = foo;
+        println!("y = {}", y);
+
+        // 这将得到一个错误：模式中没有提及 `x` 字段
+        // let Foo { y } = foo;
+    }
+
+    #[test]
     fn useEnum() {
         enum WebEvent {
             // 一个 `enum` 可以是单元结构体（称为 `unit-like` 或 `unit`），
@@ -124,5 +181,4 @@ mod ADDataTypes {
         let x: haha = 3;
         println!("{}", x);
     }
-
 }

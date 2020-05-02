@@ -1,3 +1,6 @@
+/**
+让数组中的元素的值增加一
+*/
 #[cfg(test)]
 mod baArrayTransfer {
     #[test]
@@ -9,7 +12,7 @@ mod baArrayTransfer {
             }
         }
         let a = [1, 2, 3];
-        add(a);
+        add(a);//此处传值
         for i in 0..a.len() {
             println!("a[{}]={}", i, a[i]);
         }
@@ -24,6 +27,7 @@ mod baArrayTransfer {
             }
         }
         let mut a = [1, 2, 3];
+        //此处传指针
         add(&mut a);
         for i in 0..a.len() {
             println!("a[{}]={}", i, a[i]);
