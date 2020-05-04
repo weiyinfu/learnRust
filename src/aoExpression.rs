@@ -54,6 +54,9 @@ mod AWExpression {
     }
 
     #[test]
+    #[allow(unreachable_code)]
+    #[allow(dead_code)]
+    #[allow(unused_labels)]
     fn breakMultiLoop() {
         //Rust的语句标号开头必须是’
         'outer: loop {
@@ -95,5 +98,4 @@ mod AWExpression {
         }
         println!("{}", s);
     }
-
 }

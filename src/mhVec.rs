@@ -102,3 +102,13 @@ fn iteratorCollect() {
         .collect();
     println!("{:?}", numbers);
 }
+
+#[test]
+fn resize() {
+    let mut a = Vec::<i32>::new();
+    println!("{:?}", a);
+    a.resize(5, 0);
+    println!("{:?}", a);
+    let mut b = Vec::<i32>::with_capacity(5);
+    println!("{:?}", b);
+}

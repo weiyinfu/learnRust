@@ -35,6 +35,7 @@ mod AB {
 
         // 你可以在数字左边补 0。下面语句输出 "000001"。
         println!("{number:>0width$}", number = 1, width = 6);
+        println!("{:03}",2);
     }
 
     #[test]

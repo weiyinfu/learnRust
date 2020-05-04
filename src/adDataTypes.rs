@@ -1,5 +1,5 @@
 #[cfg(test)]
-#[warn(non_camel_case_types)]
+#[allow(non_camel_case_types)]
 mod ADDataTypes {
     use std::mem::size_of_val;
 
@@ -26,6 +26,15 @@ mod ADDataTypes {
         println!("char={}", size_of_val(&'魏'));
         println!("======bool值");
         println!("bool={}", size_of_val(&true));
+    }
+
+    #[test]
+    fn useChar() {
+        let x = 'a';
+        println!("{}", x as i32);
+        let y = x as i32;
+        let b = (y + 1) as u8 as char;
+        println!("{}", b)
     }
 
     #[test]

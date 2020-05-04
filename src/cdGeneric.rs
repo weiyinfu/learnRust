@@ -7,7 +7,7 @@ use std::fmt::{Debug, Display};
 #[test]
 fn genericFunction() {
     //插入排序
-    fn bubbleSort<T: PartialOrd + Debug + Copy>(a: &mut Vec<T>) {
+    fn insertSort<T: PartialOrd + Debug + Copy>(a: &mut Vec<T>) {
         for i in 0..a.len() {
             for j in i + 1..a.len() {
                 if a[j] < a[i] {
@@ -22,7 +22,7 @@ fn genericFunction() {
     for i in 1..10 {
         a.push(random());
     }
-    bubbleSort(&mut a);
+    insertSort(&mut a);
     println!("{:?}", a);
 }
 

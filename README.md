@@ -41,6 +41,9 @@ registry = "git://mirrors.ustc.edu.cn/crates.io-index"
 [菜鸟网](https://www.runoob.com/rust/rust-tutorial.html)  
 [一百教程](https://www.yiibai.com/rust/rust-slices.html) 
 [极客学院](https://wiki.jikexueyuan.com/project/rust/dining-philosophers.html) 
+[Rust学习笔记](https://weathfold.gitbooks.io/rust-too-many-lists-zhcn/content/first-layout.html)
+[Rust Primer](https://rustcc.gitbooks.io/rustprimer/content/heap-stack/heap-stack.html)  
+
 
 # 五、Rust社区
 [知乎Rust专栏](https://www.zhihu.com/search?q=rust&type=column)

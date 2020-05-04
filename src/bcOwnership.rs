@@ -42,6 +42,15 @@ mod bcOwnership {
     }
 
     #[test]
+    fn heapVariable() {
+        //x是一个指针，它指向堆内存，只要有堆内存，那么赋值操作就会发生move，发生所有权转移。
+        let x = Box::new(3);
+        let y = x;
+        //报错：x的值已经借出去了
+        // println!("x={} y={}", x, y)
+    }
+
+    #[test]
     fn dangling() {
         //悬空
         let a;
@@ -52,5 +61,4 @@ mod bcOwnership {
         //下面这句话会报错
         // println!("a : {}", a);
     }
-
 }
