@@ -78,11 +78,12 @@ mod ADDataTypes {
     }
 
     #[test]
+    #[allow(unused_variables)]
     fn useArray() {
         //数组和切片
-        let mut a = [0; 5];
+        let  a = [0; 5];
         let b = [0, 1, 2, 3];
-        let mut c = &a[2..4];//创建数组a的切片
+        let  c = &a[2..4];//创建数组a的切片
         println!("a.len()={} c.len()={}", a.len(), c.len());
         let mut a = [[0; 3]; 3];//创建二维数组
         for i in 0..a.len() {
@@ -190,4 +191,71 @@ mod ADDataTypes {
         let x: haha = 3;
         println!("{}", x);
     }
+
+    #[test]
+    #[allow(unused_variables)]
+    fn multilineString() {
+        let x =
+            "天下大势，为我所控
+哈哈哈
+   真好
+        ";
+        println!("{}", x);
+        //单字节字符串
+        let y = b"hello world";
+        let x = r#"不需要转义个字符串\,%"#;
+        let x = "需要转义的字符串\\";
+    }
+
+    #[test]
+    fn tupleEqual() {
+        //元组比较运算
+        let x = (1, 2);
+        let y = (2, 3);
+        println!("{} {}", x < y, x == y);
+    }
+}
+
+
+#[test]
+#[allow(unused_variables)]
+fn demo() {
+    // boolean type
+    let t = true;
+    let f: bool = false;
+
+// char type
+    let c = 'c';
+
+// numeric types
+    let x = 42;
+    let y: u32 = 123_456;
+    let z: f64 = 1.23e+2;
+    let zero = z.min(123.4);
+    let bin = 0b1111_0000;
+    let oct = 0o7320_1546;
+    let hex = 0xf23a_b049i64;
+
+// string types
+    let str = "Hello, world!";
+    let  string = str.to_string();
+
+// arrays and slices
+    let a = [0, 1, 2, 3, 4];
+    let middle = &a[1..4];
+    let  ten_zeros: [i64; 10] = [0; 10];
+
+// tuples
+    let tuple: (i32, &str) = (50, "hello");
+    let (fifty, _) = tuple;
+    let hello = tuple.1;
+
+// raw pointers
+    let x = 5;
+    let raw = &x as *const i32;
+    let points_at = unsafe { *raw };
+
+    // functions
+    fn foo(x: i32) -> i32 { x }
+    let bar: fn(i32) -> i32 = foo;
 }

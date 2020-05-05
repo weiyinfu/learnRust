@@ -19,7 +19,7 @@ fn genericFunction() {
         }
     }
     let mut a: Vec<i32> = Vec::new();
-    for i in 1..10 {
+    for _i in 1..10 {
         a.push(random());
     }
     insertSort(&mut a);
@@ -69,6 +69,7 @@ fn genericClass() {
 }
 
 #[test]
+#[allow(unused_variables)]
 fn implPart() {
     //只为一部分泛型实现函数
     struct Node<T: Debug + Display> {

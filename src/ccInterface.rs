@@ -1,9 +1,9 @@
 /*
 traits的本质就是interface
 */
+use rand::random;
 use std::f64::consts::PI;
 use std::fmt::Debug;
-use rand::random;
 use std::io::Read;
 
 trait Area {
@@ -24,7 +24,7 @@ impl Area for Rectangle {
 
 #[derive(Debug)]
 struct Circle {
-    radius: f64
+    radius: f64,
 }
 
 impl Area for Circle {
@@ -39,7 +39,10 @@ fn first() {
         println!("{}", shape.area());
     }
     printArea(Circle { radius: 2.0f64 });
-    printArea(Rectangle { width: 1.2f64, height: 1.3f64 });
+    printArea(Rectangle {
+        width: 1.2f64,
+        height: 1.3f64,
+    });
 }
 
 #[test]
@@ -71,30 +74,41 @@ fn useGenericFunction() {
         println!("{}", shape.area());
     }
     printArea(Circle { radius: 2.0f64 });
-    printArea(Rectangle { width: 1.2f64, height: 1.3f64 });
+    printArea(Rectangle {
+        width: 1.2f64,
+        height: 1.3f64,
+    });
 }
 
 #[test]
 fn useGenericFunction2() {
     //使用where子句约束泛型
-    fn printArea<T>(shape: T) where T: Debug + Area {
+    fn printArea<T>(shape: T)
+    where
+        T: Debug + Area,
+    {
         println!("{}", shape.area());
     }
     printArea(Circle { radius: 2.0f64 });
-    printArea(Rectangle { width: 1.2f64, height: 1.3f64 });
+    printArea(Rectangle {
+        width: 1.2f64,
+        height: 1.3f64,
+    });
 }
 
 #[test]
 fn genericClass() {
     struct Node<T: Area> {
-        shape: T
+        shape: T,
     }
     impl<T: Area> Node<T> {
         fn print(&self) {
             println!("{}", self.shape.area());
         }
     }
-    let x = Node { shape: Circle { radius: 1.0 } };
+    let x = Node {
+        shape: Circle { radius: 1.0 },
+    };
     x.print();
 }
 
@@ -156,7 +170,114 @@ fn extendTrait() {
             print!("{}", self.second);
         }
     }
-    let x = Example { first: String::from("one"), second: String::from("two") };
+    let x = Example {
+        first: String::from("one"),
+        second: String::from("two"),
+    };
     x.t();
     x.f();
+}
+
+#[test]
+fn twoTrait() {
+    trait A {
+        fn a(&self);
+    }
+    trait B {
+        fn b(&self);
+        fn a(&self);
+    }
+    fn go(x: &impl A) {
+        x.a();
+    }
+    struct One {}
+    impl B for One {
+        fn b(&self) {
+            println!("B.b")
+        }
+
+        fn a(&self) {
+            println!("B.a")
+        }
+    }
+    let x = One {};
+    //这句话报错，虽然B的函数包括A，但是One结构体依旧需要实现A
+    // go(x);
+    impl A for One {
+        fn a(&self) {
+            println!("A.a");
+        }
+    }
+    go(&x);
+    A::a(&x);
+    B::a(&x);
+}
+
+#[test]
+fn twoTrait2() {
+    struct Test;
+
+    trait Trait1 {
+        fn foo();
+    }
+
+    trait Trait2 {
+        fn foo();
+    }
+
+    impl Trait1 for Test {
+        fn foo() {}
+    }
+    impl Trait2 for Test {
+        fn foo() {}
+    }
+
+    <Test as Trait1>::foo()
+}
+
+#[test]
+#[allow(unused_variables)]
+fn genericTrait() {
+    //泛型trait的两种方式
+    mod one {
+        // use generic parameters
+        pub trait Graph<N, E> {
+            fn has_edge(&self, startNode: &N, endNode: &N) -> bool;
+            fn edges(&self, node: &N) -> Vec<E>;
+        }
+
+        fn distance<N, E, G: Graph<N, E>>(graph: &G, start: &N, end: &N) -> u32 {
+            0
+        }
+    }
+    mod two {
+        // use associated types
+        pub(crate) trait Graph {
+            type N;
+            type E;
+
+            fn has_edge(&self, start: &Self::N, end: &Self::N) -> bool;
+            fn edges(&self, node: &Self::N) -> Vec<Self::E>;
+        }
+
+        fn distance<G: Graph>(graph: &G, start: &G::N, end: &G::N) -> u32 {
+            0
+        }
+    }
+    use two::*;
+    struct Node;
+    struct Edge;
+    struct SimpleGraph;
+    impl Graph for SimpleGraph {
+        type N = Node;
+        type E = Edge;
+        fn has_edge(&self, n1: &Node, n2: &Node) -> bool {
+            false
+        }
+        fn edges(&self, n: &Node) -> Vec<Edge> {
+            Vec::new()
+        }
+    }
+    let graph = SimpleGraph;
+    let object = Box::new(graph) as Box<dyn Graph<N = Node, E = Edge>>;
 }

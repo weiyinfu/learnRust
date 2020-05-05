@@ -1,4 +1,4 @@
-use std::mem::swap;
+#![allow(non_upper_case_globals)]
 use std::fmt::Debug;
 
 const n: usize = 4;

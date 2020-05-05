@@ -128,3 +128,27 @@ mod axIfLet {
         // 而 `while let` 没有。
     }
 }
+
+#[test]
+fn demo() {
+    let number = Some(7);
+    let mut optional = Some(0);
+
+// If `let` destructures `number` into `Some(i)`, evaluate the block.
+    if let Some(i) = number {
+        println!("Matched {:?}!", i);
+    } else {
+        println!("Didn't match a number!");
+    }
+
+// While `let` destructures `optional` into `Some(i)`, evaluate the block.
+    while let Some(i) = optional {
+        if i > 9 {
+            println!("Greater than 9, quit!");
+            optional = None;
+        } else {
+            println!("`i` is `{:?}`. Try again.", i);
+            optional = Some(i + 1);
+        }
+    }
+}

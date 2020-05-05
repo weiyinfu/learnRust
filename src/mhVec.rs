@@ -1,4 +1,5 @@
 #[test]
+#[allow(unused_variables)]
 fn createVec() {
     let a = Vec::<i32>::new();
     let a: Vec<i32> = Vec::new();
@@ -104,6 +105,7 @@ fn iteratorCollect() {
 }
 
 #[test]
+#[allow(unused_mut)]
 fn resize() {
     let mut a = Vec::<i32>::new();
     println!("{:?}", a);
@@ -111,4 +113,13 @@ fn resize() {
     println!("{:?}", a);
     let mut b = Vec::<i32>::with_capacity(5);
     println!("{:?}", b);
+}
+
+#[test]
+fn createArray() {
+    const n: usize = 10;
+    //如果改成let就会报错
+    // let n: usize = 10;
+    let a = [false; n];
+    println!("{:?}", a);
 }

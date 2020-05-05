@@ -18,3 +18,39 @@ mod afStruct {
         println!("{}", x.area());
     }
 }
+
+#[test]
+fn deconstruct() {
+    struct Node {
+        name: String,
+        age: i32,
+    }
+    let x = Node { name: String::from("hha"), age: 112 };
+    //使用..忽略其它字段
+    let Node { age: AGE, .. } = x;
+    println!("{}", AGE);
+}
+
+#[test]
+fn threeFunction() {
+    struct Node {}
+    //结构的三种函数
+    impl Node {
+        fn one() {
+            //静态函数
+        }
+        fn two(&self) {
+            //不可变引用，只读
+        }
+        fn three(self) {
+            //move引用，只能调用一次
+        }
+        fn four(&mut self) {
+            //可写引用，要想调用这个函数，self必须可写
+        }
+    }
+    let x = Node {};
+    x.three();
+    //再次执行下面语句就会报错
+    // x.three();
+}

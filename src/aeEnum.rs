@@ -2,6 +2,7 @@
 Rust中的Enum非常重要，需要特别说明一下。
 */
 #[cfg(test)]
+#[allow(unused_variables)]
 mod AEEnum {
     use std::mem::size_of_val;
 
@@ -46,6 +47,7 @@ mod AEEnum {
     }
 
     #[test]
+    #[allow(unused_variables)]
     fn enumStruct() {
         /**
         enum的取值可以是结构体

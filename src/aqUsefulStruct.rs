@@ -5,6 +5,7 @@ Some,Optional,Result等常用数据结构
 use std::fs::File;
 
 #[test]
+#[allow(unused_variables)]
 fn optionAndSome() {
     let x: Option<i32> = Some(10);  // 'T' is of type i32.
     let x: Option<bool> = Some(true);  // 'T' is of type bool.

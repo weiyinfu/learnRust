@@ -23,13 +23,13 @@ fn WritableSingleton() {
         }
     }
     {
-        let mut x = Point::get_instance();
+        let  x = Point::get_instance();
         let mut p = x.lock().unwrap();
         println!("{:?}", p);
         p.x = 13;
         println!("{:?}", p);
     }
-    let mut xx = Point::get_instance();
+    let  xx = Point::get_instance();
     println!("{:?}", xx.lock().unwrap());
 }
 
@@ -64,7 +64,7 @@ fn readableSingleton() {
 
     let xx = get_instance1();
     println!("{:?}", xx);
-    let mut x = get_instance2();
+    let x = get_instance2();
     println!("{:?}", x);
 }
 

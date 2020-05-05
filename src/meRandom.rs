@@ -31,7 +31,7 @@ mod acRandom {
         println!("shuffle之后：{:?}", a);
         println!("随机选择一个元素：{:?}", x.choose(&a));
         //使用可变随机选择，选择元素，然后把元素改为0，最后肯定是全部元素都变成了0
-        for i in 0..100 {
+        for _ in 0..100 {
             let change = x.choose_mut(&mut a);
             *change.unwrap() = 0;
         }

@@ -1,4 +1,5 @@
 #[cfg(test)]
+#[allow(unused_variables)]
 mod testString {
     #[test]
     fn create() {
@@ -45,13 +46,14 @@ mod testString {
     #[test]
     fn stringSplit2() {
         let x = "one two three four";
-        let mut res = x.split_whitespace();
+        let res = x.split_whitespace();
         print!("count={}", res.count());
         //如果取消注释下面这一行，就会报错
         // print!("count={}", res.count());
     }
 
     #[test]
+    #[allow(unused_mut)]
     fn stringSplit3() {
         let x = "one two three";
         let mut res = x.split_whitespace();

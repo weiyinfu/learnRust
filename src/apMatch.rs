@@ -99,6 +99,48 @@ mod apMatch {
         }
     }
 
+    #[test]
+    fn useRef() {
+        let x = 5;
+        let mut y = 5;
+
+        match x {
+            // the `r` inside the match has the type `&i32`
+            ref r => println!("Got a reference to {}", r),
+        }
+
+        match y {
+            // the `mr` inside the match has the type `&i32` and is mutable
+            ref mut mr => println!("Got a mutable reference to {}", mr),
+        }
+    }
+
+    #[test]
+    fn deconstruct() {
+        struct Point {
+            x: i32,
+            y: i32,
+        }
+
+        let origin = Point { x: 0, y: 0 };
+
+        match origin {
+            Point { x, .. } => println!("x is {}", x),
+        }
+
+        enum OptionalInt {
+            Value(i32),
+            Missing,
+        }
+
+        let x = OptionalInt::Value(5);
+
+        match x {
+            OptionalInt::Value(i) if i > 5 => println!("Got an int bigger than five!"),
+            OptionalInt::Value(..) => println!("Got an int!"),
+            OptionalInt::Missing => println!("No such luck."),
+        }
+    }
 
     #[test]
     fn matchBind() {

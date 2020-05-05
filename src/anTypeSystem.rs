@@ -102,3 +102,14 @@ mod ANDataTypeConvert {
         println!("{},{}", x.to_string(), y.to_string());
     }
 }
+
+#[test]
+fn str2number() {
+    //不指定类型就会报错，指定类型有下面两种方式
+    // let x = "123".parse().unwrap();
+    // println!("{}", x);
+    let x = "123".parse::<i32>().unwrap();
+    println!("{}", x);
+    let x: i32 = "123".parse().unwrap();
+    println!("{}", x);
+}

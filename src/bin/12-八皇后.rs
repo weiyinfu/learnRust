@@ -1,3 +1,5 @@
+#![allow(non_snake_case, non_upper_case_globals)]
+
 const n: usize = 8;
 static mut total: i32 = 0;
 
@@ -61,7 +63,9 @@ fn go(a: &mut [[i32; n]; n], x: usize, y: usize, queenCount: i32) {
 fn main() {
     let mut a = [[0; n]; n];
     //写一个八皇后问题
-    unsafe { total = 0; }
+    unsafe {
+        total = 0;
+    }
     go(&mut a, 0, 0, 0);
     println!("总共有{}种放法", unsafe { total });
 }

@@ -9,6 +9,7 @@ RefCell <T>：RefCell <T>是一个智能指针，允许借用可变数据，即�
 */
 
 #[derive(Debug)]
+#[allow(dead_code)]
 enum List {
     Cons(i32, Box<List>),
     Nil,

@@ -1,13 +1,13 @@
-const x: i32 = 3;
-static y: i32 = 4;
-static mut z: i32 = 5;
+const X: i32 = 3;
+static Y: i32 = 4;
+static mut Z: i32 = 5;
 
 fn main() {
-    println!("x={},y={}", x, y);
+    println!("x={},y={}", X, Y);
     //static默认为常量
     // y=5;
     unsafe {
-        z = 6;
-        println!("{}", z);
+        Z = 6;
+        println!("{}", Z);
     }
 }

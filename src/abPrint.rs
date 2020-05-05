@@ -1,7 +1,15 @@
+use std::io::{stdout, Write};
+
+#[test]
+fn hello() {
+    println!("hello world");
+    stdout().write("hello world".as_bytes()).unwrap();
+}
+
 #[cfg(test)]
 mod AB {
-    use std::fmt::{Display, Formatter};
     use std::fmt;
+    use std::fmt::{Display, Formatter};
 
     #[test]
     fn BasicPrint() {
@@ -17,10 +25,12 @@ mod AB {
         println!("{0}, this is {1}. {1}, this is {0}", "Alice", "Bob");
 
         // 可以使用命名参数。
-        println!("{subject} {verb} {object}",
-                 object = "the lazy dog",
-                 subject = "the quick brown fox",
-                 verb = "jumps over");
+        println!(
+            "{subject} {verb} {object}",
+            object = "the lazy dog",
+            subject = "the quick brown fox",
+            verb = "jumps over"
+        );
     }
 
     #[test]
@@ -35,7 +45,7 @@ mod AB {
 
         // 你可以在数字左边补 0。下面语句输出 "000001"。
         println!("{number:>0width$}", number = 1, width = 6);
-        println!("{:03}",2);
+        println!("{:03}", 2);
     }
 
     #[test]
@@ -56,7 +66,10 @@ mod AB {
             name: String,
             age: u32,
         }
-        let x = Node { name: "weiyinfu".to_string(), age: 17 };
+        let x = Node {
+            name: "weiyinfu".to_string(),
+            age: 17,
+        };
         println!("{:?}", x);
     }
 
@@ -71,7 +84,10 @@ mod AB {
                 write!(f, "name:{},age={}", self.name, self.age)
             }
         }
-        let x = Node { name: "weiyinfu".to_string(), age: 17 };
+        let x = Node {
+            name: "weiyinfu".to_string(),
+            age: 17,
+        };
         println!("{:?}", x);
     }
 
@@ -87,7 +103,6 @@ mod AB {
             }
         }
     }
-
 
     #[test]
     fn printList() {

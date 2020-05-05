@@ -33,3 +33,12 @@ mod AMVariable {
         println!("{}", x.name);
     }
 }
+
+#[test]
+fn getPointer() {
+    //获取指针，因为3是常量，所以二者指向同一个地址
+    let x = &3;
+    let y = &3;
+    println!("{}", x as *const i32 as usize);
+    println!("{}", y as *const i32 as usize);
+}

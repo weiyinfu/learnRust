@@ -25,6 +25,7 @@ fn second() {
 }
 
 #[test]
+#[allow(unused_variables)]
 fn dropTrait() {
     struct Example {
         a: i32,
@@ -40,6 +41,7 @@ fn dropTrait() {
 }
 
 #[test]
+#[allow(unused_variables)]
 fn handDrop() {
     //手动drop，不能调用a.drop()函数，而应该调用mem中的drop函数
     struct Example {

@@ -47,6 +47,7 @@ fn testTupleStruct() {
 }
 
 #[test]
+#[allow(unused_assignments,unused_variables)]
 fn useUse() {
     //使用Use可以减少
     mod a {

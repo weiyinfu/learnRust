@@ -1,36 +1,43 @@
-use std::fmt::Display;
+#![allow(non_snake_case, unused_variables, dead_code)]
 
-enum Node {
+use std::fmt::{Debug, Display};
+use std::sync::Arc;
+
+enum Node<T> {
     NONE,
-    Value {
-        value: i32,
-        next: Box<Node>,
-    },
+    Value { value: T, next: Arc<Node<T>> },
 }
 
-struct LinkedList {
-    head: Node
+struct LinkedList<T> {
+    head: Node<T>,
 }
 
-fn getNode(value: i32) -> Node {
-    return Node::Value { value, next: Box::new(Node::NONE) };
+fn getNode<T>(value: T) -> Node<T> {
+    return Node::Value {
+        value,
+        next: Arc::new(Node::NONE),
+    };
 }
 
-impl LinkedList {
-    fn append(&mut self, value: i32) {
+impl<T> LinkedList<T>
+where
+    T: Display + Debug,
+{
+    fn append(&mut self, value: T) {
         /*
         使用结构体的坏处是，解构结构体的时候需要写很多
         */
-        if let Node::Value { value, next } = &mut self.head {
+        if let Node::Value { next, .. } = &mut self.head {
             //如何把下面这句话调通
-            let now = Node::Value { value: *value, next: *next };
-            *next = Box::new(now);
+            let temp = (*next).to_owned();
+            let now = Node::Value { value, next: temp };
+            *next = Arc::new(now);
         } else {
             unreachable!()
         }
     }
-    fn remove(&self, value: i32) {}
-    fn indexOf(&self, value: i32) {}
+    fn remove(&self, value: T) {}
+    fn indexOf(&self, value: T) {}
     fn print(&self) {
         let mut now = &self.head;
         loop {
@@ -45,7 +52,7 @@ impl LinkedList {
 }
 
 fn main() {
-    let mut x: LinkedList = LinkedList { head: getNode(0) };
+    let mut x: LinkedList<i32> = LinkedList { head: getNode(0) };
     x.append(3);
     x.append(4);
     x.print();

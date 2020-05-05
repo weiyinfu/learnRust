@@ -1,5 +1,7 @@
+#![allow(non_snake_case, unused_mut, unused_variables)]
+
 use rand;
-use rand::{Rng, ThreadRng};
+use rand::Rng;
 
 #[derive(Debug)]
 enum Node {
@@ -56,10 +58,12 @@ fn preOrder(root: &Node) {
         let now = sta.pop().unwrap();
         if let Node::Node(no) = now {
             print!("{},", no.value);
-            if let Node::NULL = *no.right {} else {
+            if let Node::NULL = *no.right {
+            } else {
                 sta.push(&*no.right);
             }
-            if let Node::NULL = *no.left {} else {
+            if let Node::NULL = *no.left {
+            } else {
                 sta.push(&*no.left);
             }
         }

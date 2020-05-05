@@ -19,9 +19,10 @@ mod biSlice {
     }
 
     #[test]
+    #[allow(unused_assignments,unused_variables)]
     fn sliceWrite() {
         //更改切片之后原数组的值也会发生变化
-        let mut x = String::from("one two three");
+        let  x = String::from("one two three");
         let mut y = &x[1..4];
         y = "ag";//对切片执行写操作没什么用处
         println!("{}", x);

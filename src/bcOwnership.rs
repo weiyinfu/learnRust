@@ -1,4 +1,5 @@
 #[cfg(test)]
+#[allow(unused_variables)]
 mod bcOwnership {
     #[test]
     fn basicTypeAssinment() {
@@ -13,7 +14,7 @@ mod bcOwnership {
     #[test]
     fn variableAssinment() {
         struct Node(i32);
-        let mut x = Node(3);
+        let  x = Node(3);
         let y = x;
         //下面的语句会报错，因为x的所有权已经交给y了
         // println!("{}", x.0);
@@ -36,7 +37,7 @@ mod bcOwnership {
                 self.0 = source.0;
             }
         }
-        let mut x = Node(3);
+        let x = Node(3);
         let y = x;
         println!("{}", x.0);
     }
@@ -51,6 +52,7 @@ mod bcOwnership {
     }
 
     #[test]
+    #[allow(unused_assignments)]
     fn dangling() {
         //悬空
         let a;
