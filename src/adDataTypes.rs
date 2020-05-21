@@ -1,7 +1,7 @@
 #[cfg(test)]
 #[allow(non_camel_case_types)]
 mod ADDataTypes {
-    use std::mem::size_of_val;
+    use std::mem::{size_of, size_of_val};
 
     #[test]
     fn basicDataType() {
@@ -39,13 +39,15 @@ mod ADDataTypes {
 
     #[test]
     fn useListerals() {
-        //u8类型的字节字面量
+        //u8类型的字节字面量,四种进制：2,8,16,10，字符
         let x = b'A';
         println!("{}", x);
-        let x = 0x23;
-        println!("{:x}", x);
+        let x = 0b0111;
+        println!("{:b}", x);
         let x = 0o23;
         println!("{:o}", x);
+        let x = 0x23;
+        println!("{:x}", x);
         //使用更美观的字面量
         let x = 0x232_342_34;
         println!("{:x}", x);
@@ -74,18 +76,23 @@ mod ADDataTypes {
     fn compoundDataType() {
         //复合数据类型
         println!("sizeof array={}", size_of_val(&[1, 2, 3u8]));
-        println!("sizeof tuple={}=sizeof({})+sizeof({})", size_of_val(&(1u128, '我')), 1u128, '我');
+        println!(
+            "sizeof tuple={}=sizeof({})+sizeof({})",
+            size_of_val(&(1u128, '我')),
+            1u128,
+            '我'
+        );
     }
 
     #[test]
     #[allow(unused_variables)]
     fn useArray() {
         //数组和切片
-        let  a = [0; 5];
+        let a = [0; 5];
         let b = [0, 1, 2, 3];
-        let  c = &a[2..4];//创建数组a的切片
+        let c = &a[2..4]; //创建数组a的切片
         println!("a.len()={} c.len()={}", a.len(), c.len());
-        let mut a = [[0; 3]; 3];//创建二维数组
+        let mut a = [[0; 3]; 3]; //创建二维数组
         for i in 0..a.len() {
             for j in 0..a[i].len() {
                 a[i][j] = i * a[0].len() + j;
@@ -102,7 +109,6 @@ mod ADDataTypes {
         show(a);
     }
 
-
     #[test]
     fn useStruct() {
         //使用结构体，结构体有三种，元组结构体，C结构体，空结构体（只用来表示一种类型）
@@ -116,13 +122,22 @@ mod ADDataTypes {
         #[derive(Debug)]
         struct EmptyStruct;
         let x = TupleStruct("魏印福".to_string(), 32);
-        let y = CStruct { name: "魏印福".to_string(), age: 17 };
-        println!("TupleStruct={:?}\nCStruct={:?}\nEmptyStruct={:?}", x, y, EmptyStruct)
+        let y = CStruct {
+            name: "魏印福".to_string(),
+            age: 17,
+        };
+        println!(
+            "TupleStruct={:?}\nCStruct={:?}\nEmptyStruct={:?}",
+            x, y, EmptyStruct
+        )
     }
 
     #[test]
     fn deconstructStructure() {
-        struct Foo { x: (u32, u32), y: u32 }
+        struct Foo {
+            x: (u32, u32),
+            y: u32,
+        }
 
         // 解构结构体的成员
         let foo = Foo { x: (1, 2), y: 3 };
@@ -183,7 +198,6 @@ mod ADDataTypes {
         inspect(unload);
     }
 
-
     #[test]
     fn useType() {
         //使用类型别名
@@ -195,8 +209,7 @@ mod ADDataTypes {
     #[test]
     #[allow(unused_variables)]
     fn multilineString() {
-        let x =
-            "天下大势，为我所控
+        let x = "天下大势，为我所控
 哈哈哈
    真好
         ";
@@ -216,7 +229,6 @@ mod ADDataTypes {
     }
 }
 
-
 #[test]
 #[allow(unused_variables)]
 fn demo() {
@@ -224,10 +236,10 @@ fn demo() {
     let t = true;
     let f: bool = false;
 
-// char type
+    // char type
     let c = 'c';
 
-// numeric types
+    // numeric types
     let x = 42;
     let y: u32 = 123_456;
     let z: f64 = 1.23e+2;
@@ -236,26 +248,28 @@ fn demo() {
     let oct = 0o7320_1546;
     let hex = 0xf23a_b049i64;
 
-// string types
+    // string types
     let str = "Hello, world!";
-    let  string = str.to_string();
+    let string = str.to_string();
 
-// arrays and slices
+    // arrays and slices
     let a = [0, 1, 2, 3, 4];
     let middle = &a[1..4];
-    let  ten_zeros: [i64; 10] = [0; 10];
+    let ten_zeros: [i64; 10] = [0; 10];
 
-// tuples
+    // tuples
     let tuple: (i32, &str) = (50, "hello");
     let (fifty, _) = tuple;
     let hello = tuple.1;
 
-// raw pointers
+    // raw pointers
     let x = 5;
     let raw = &x as *const i32;
     let points_at = unsafe { *raw };
 
     // functions
-    fn foo(x: i32) -> i32 { x }
+    fn foo(x: i32) -> i32 {
+        x
+    }
     let bar: fn(i32) -> i32 = foo;
 }

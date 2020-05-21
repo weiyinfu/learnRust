@@ -1,7 +1,6 @@
 use std::io::{stdout, Write};
 
-#[test]
-fn hello() {
+pub fn hello() {
     println!("hello world");
     stdout().write("hello world".as_bytes()).unwrap();
 }

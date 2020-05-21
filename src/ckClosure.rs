@@ -207,8 +207,8 @@ mod ThreeFn {
 
     #[test]
     fn useFn() {
-        let mut s = String::from("hello");
-        let mut closure = || {
+        let s = String::from("hello");
+        let closure = || {
             &s;
         };
         is_fn(closure);

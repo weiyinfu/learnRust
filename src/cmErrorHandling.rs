@@ -1,6 +1,6 @@
 use std::fs::File;
-use std::io::Read;
 use std::io;
+use std::io::Read;
 
 #[test]
 fn useAssert() {
@@ -11,6 +11,7 @@ fn useAssert() {
 }
 
 #[test]
+#[should_panic]
 fn useUnreachable() {
     //如果到达了unreachable代码就会报错
     print!("x");
@@ -18,6 +19,7 @@ fn useUnreachable() {
 }
 
 #[test]
+#[should_panic]
 fn usePanic() {
     panic!("hello");
 }
@@ -32,17 +34,17 @@ fn useResult() {
 #[test]
 fn returnResult() {
     fn isEven(x: i32) -> Result<&'static str, &'static str> {
-        if (x & 1) == 0 { Result::Ok("yes") } else { Result::Err("no") }
+        if (x & 1) == 0 {
+            Result::Ok("yes")
+        } else {
+            Result::Err("no")
+        }
     }
     for i in 1..10 {
         println!("Is {} is even?", i);
         match isEven(i) {
-            Ok(value) => {
-                println!("{}", value)
-            }
-            Err(value) => {
-                println!("{}", value)
-            }
+            Ok(value) => println!("{}", value),
+            Err(value) => println!("{}", value),
         }
     }
 }

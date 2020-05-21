@@ -38,4 +38,11 @@ mod ayIterate {
         }
         println!("names: {:?}", names);
     }
+
+    #[test]
+    fn enumerate() {
+        for (ind, value) in "one two three".split_whitespace().enumerate() {
+            println!("index={},value={}", ind, value);
+        }
+    }
 }

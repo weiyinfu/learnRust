@@ -2,9 +2,13 @@
 traits的本质就是interface
 */
 use rand::random;
+use serde::export::fmt::Error;
+use serde::export::Formatter;
 use std::f64::consts::PI;
+use std::fmt;
 use std::fmt::Debug;
 use std::io::Read;
+use std::path::Display;
 
 trait Area {
     fn area(&self) -> f64;
@@ -280,4 +284,16 @@ fn genericTrait() {
     }
     let graph = SimpleGraph;
     let object = Box::new(graph) as Box<dyn Graph<N = Node, E = Edge>>;
+}
+
+#[test]
+fn forbidden() {
+    // 不能为外部类型实现外部 trait，这被称为“孤儿规则”，这个限制被称为“相干性”，这是为了避免当前的实现干扰外部实现。
+    // impl fmt::Display for Vec<i32> {
+    //     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+    //         write!(f, "nothing")
+    //     }
+    // }
+    let x = vec![1, 2, 3];
+    // println!("{}", x);
 }

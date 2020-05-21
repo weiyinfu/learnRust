@@ -29,9 +29,14 @@ fn diverge() {
 
 #[test]
 fn highOrderFunction() {
-    fn add_one(x: i32) -> i32 { x + 1 }
+    fn add_one(x: i32) -> i32 {
+        x + 1
+    }
 
-    fn apply<F>(f: F, y: i32) -> i32 where F: Fn(i32) -> i32 {
+    fn apply<F>(f: F, y: i32) -> i32
+    where
+        F: Fn(i32) -> i32,
+    {
         f(y) * y
     }
 
@@ -64,4 +69,3 @@ fn highOrderFunction() {
     let z2 = apply(translate, 2);
     println!("{}, {}, {}", z0, z1, z2);
 }
-

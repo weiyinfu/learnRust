@@ -31,7 +31,7 @@ fn genericStruct() {
     //泛型结构体
     #[derive(Debug)]
     struct Node<T> {
-        name: T
+        name: T,
     }
     let x = Node { name: "weiyinfu" };
     let y = Node { name: 18 };
@@ -45,8 +45,7 @@ fn genericEnum() {
         Some(T),
         None,
     }
-    enum Result<T, E>
-    {
+    enum Result<T, E> {
         OK(T),
         Err(E),
     }
@@ -55,7 +54,7 @@ fn genericEnum() {
 #[test]
 fn genericClass() {
     struct Node<T: Debug + Display> {
-        name: T
+        name: T,
     }
     impl<T: Debug + Display> Node<T> {
         fn printName(self) {
@@ -73,7 +72,7 @@ fn genericClass() {
 fn implPart() {
     //只为一部分泛型实现函数
     struct Node<T: Debug + Display> {
-        name: T
+        name: T,
     }
     impl Node<&str> {
         fn printName(self) {
@@ -85,4 +84,19 @@ fn implPart() {
     let x = Node { name: 18 };
     //int类型的Node并没有printName函数
     // x.printName();
+}
+
+#[allow(dead_code)]
+fn addr<T>(x: &T) -> usize {
+    return x as *const T as usize;
+}
+
+#[test]
+fn genericAddress() {
+    let x = 0;
+    let a = Vec::<i32>::new();
+    let y = 0;
+    println!("x={} {}", addr(&x), &x as *const i32 as usize);
+    println!("y={} {}", addr(&y), &y as *const i32 as usize);
+    println!("a={} {}", addr(&a), &a as *const Vec<i32> as usize);
 }

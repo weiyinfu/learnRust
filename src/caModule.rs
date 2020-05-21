@@ -3,11 +3,13 @@ fn NestingModule() {
     mod a {
         pub mod b {
             pub struct Node {
-                pub name: String
+                pub name: String,
             }
         }
     }
-    let x = a::b::Node { name: String::from("haha") };
+    let x = a::b::Node {
+        name: String::from("haha"),
+    };
     println!("{:?}", x.name);
 }
 
@@ -18,11 +20,13 @@ fn NestingModule2() {
         pub(crate) mod b {
             #[derive(Debug)]
             pub(crate) struct Node {
-                pub(crate) name: String
+                pub(crate) name: String,
             }
         }
     }
-    let x = a::b::Node { name: String::from("haha") };
+    let x = a::b::Node {
+        name: String::from("haha"),
+    };
     println!("{:?}", x);
 }
 
@@ -47,27 +51,35 @@ fn testTupleStruct() {
 }
 
 #[test]
-#[allow(unused_assignments,unused_variables)]
+#[allow(unused_assignments, unused_variables)]
 fn useUse() {
     //使用Use可以减少
     mod a {
         pub mod b {
             pub struct Node {
-                pub name: String
+                pub name: String,
             }
         }
     }
     use a::b as haha;
-    let x = haha::Node { name: String::from("haha") };
+    let x = haha::Node {
+        name: String::from("haha"),
+    };
     println!("{}", x.name);
     use a::b::Node;
-    let y = Node { name: String::from("ha") };
+    let y = Node {
+        name: String::from("ha"),
+    };
     println!("{}", y.name);
     use a::b::Node as No;
-    let z = No { name: String::from("no") };
+    let z = No {
+        name: String::from("no"),
+    };
     println!("{}", z.name);
-    use a::b::*;//引入全部
-    let m = Node { name: String::from("haha") };
+    use a::b::*; //引入全部
+    let m = Node {
+        name: String::from("haha"),
+    };
 }
 
 #[test]
@@ -91,4 +103,15 @@ fn visitParentModule() {
             }
         }
     }
+}
+
+#[test]
+fn reExport() {
+    mod main {
+        mod a {
+            pub fn f() {}
+        }
+        pub use a::f;
+    }
+    main::f();
 }

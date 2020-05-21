@@ -5,7 +5,7 @@ mod testPath {
 
     #[test]
     fn usePath() {
-        let filepath = "../idcard.txt";
+        let filepath = "./Cargo.toml";
         println!("{}", filepath);
         let path = Path::new(filepath);
         println!("{}", path.display());
@@ -16,7 +16,10 @@ mod testPath {
         let abspath = path.canonicalize().unwrap();
         println!("绝对路径:{}", abspath.display());
         println!("是不是文件{}", path.is_file());
-        println!("当前路径{}", Path::new(".").canonicalize().unwrap().display());
+        println!(
+            "当前路径{}",
+            Path::new(".").canonicalize().unwrap().display()
+        );
     }
 
     #[test]

@@ -14,9 +14,12 @@ mod AEEnum {
             tuesday,
         }
         use Days::{monday, tuesday};
-        println!("monday.size={},tuesday.size={}", size_of_val(&monday), size_of_val(&tuesday))
+        println!(
+            "monday.size={},tuesday.size={}",
+            size_of_val(&monday),
+            size_of_val(&tuesday)
+        )
     }
-
 
     #[test]
     fn CStyleEnum() {
@@ -56,7 +59,10 @@ mod AEEnum {
             xNode(i32),
             User { name: String, age: i32 },
         }
-        let x: Day = Day::User { name: "weiyinfu".to_string(), age: 12 };
+        let x: Day = Day::User {
+            name: "weiyinfu".to_string(),
+            age: 12,
+        };
     }
 
     #[test]
@@ -71,5 +77,35 @@ mod AEEnum {
         if let Planet::earth(value) = x {
             println!("发现一个行星{}", value);
         }
+    }
+
+    #[test]
+    fn manyKind() {
+        enum Message {
+            Quit,
+            Move { x: i32, y: i32 },
+            Write(String),
+            ChangeColor(i32, i32, i32),
+        }
+        impl Message {
+            fn print(&self) {
+                match &self {
+                    Message::Quit => {
+                        println!("quit");
+                    }
+                    Message::Move { .. } => {
+                        println!("move");
+                    }
+                    Message::Write(_) => {
+                        println!("write");
+                    }
+                    Message::ChangeColor(_, _, _) => {
+                        println!("change color");
+                    }
+                }
+            }
+        }
+        let x = Message::Quit;
+        x.print();
     }
 }

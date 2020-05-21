@@ -11,8 +11,7 @@ mod axIfLet {
                 // ^ 行首需要 2 层缩进。这里从 optional 中解构出 `i`。
                 // 译注：正确的缩进是好的，但并不是 “不缩进就不能运行” 这个意思。
             }
-            _ => {}
-            // ^ 必须有，因为 `match` 需要覆盖全部情况。不觉得这行很多余吗？
+            _ => {} // ^ 必须有，因为 `match` 需要覆盖全部情况。不觉得这行很多余吗？
         };
     }
 
@@ -42,7 +41,7 @@ mod axIfLet {
 
         if let Some(i) = emoticon {
             println!("Matched {:?}!", i);
-            // 解构失败。使用 `else if` 来判断是否满足上面提供的条件。
+        // 解构失败。使用 `else if` 来判断是否满足上面提供的条件。
         } else if i_like_letters {
             println!("Didn't match a number. Let's go with a letter!");
         } else {
@@ -86,7 +85,7 @@ mod axIfLet {
         // 将 `optional` 设为 `Option<i32>` 类型
         let mut optional = Some(0);
 
-// 重复运行这个测试。
+        // 重复运行这个测试。
         loop {
             match optional {
                 // 如果 `optional` 解构成功，就执行下面语句块。
@@ -101,8 +100,9 @@ mod axIfLet {
                     // ^ 需要三层缩进！
                 }
                 // 当解构失败时退出循环：
-                _ => { break; }
-                // ^ 为什么必须写这样的语句呢？肯定有更优雅的处理方式！
+                _ => {
+                    break;
+                } // ^ 为什么必须写这样的语句呢？肯定有更优雅的处理方式！
             }
         }
     }
@@ -134,14 +134,14 @@ fn demo() {
     let number = Some(7);
     let mut optional = Some(0);
 
-// If `let` destructures `number` into `Some(i)`, evaluate the block.
+    // If `let` destructures `number` into `Some(i)`, evaluate the block.
     if let Some(i) = number {
         println!("Matched {:?}!", i);
     } else {
         println!("Didn't match a number!");
     }
 
-// While `let` destructures `optional` into `Some(i)`, evaluate the block.
+    // While `let` destructures `optional` into `Some(i)`, evaluate the block.
     while let Some(i) = optional {
         if i > 9 {
             println!("Greater than 9, quit!");
@@ -150,5 +150,17 @@ fn demo() {
             println!("`i` is `{:?}`. Try again.", i);
             optional = Some(i + 1);
         }
+    }
+}
+
+#[test]
+fn someValue() {
+    //someValue
+    let x: Option<i32> = Some(3);
+    if let Some(3) = x {
+        println!("yes");
+    }
+    if x == Some(3) {
+        println!("yes");
     }
 }

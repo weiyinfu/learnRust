@@ -10,3 +10,9 @@ fn printArgs() {
         println!("{} = {}", i.0.to_str().unwrap(), i.1.to_str().unwrap())
     }
 }
+
+#[test]
+fn useArgs() {
+    let args: Vec<String> = std::env::args().collect();
+    println!("{:?}", args);
+}

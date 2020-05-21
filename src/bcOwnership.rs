@@ -2,6 +2,35 @@
 #[allow(unused_variables)]
 mod bcOwnership {
     #[test]
+    fn one() {
+        /*
+                引用的规则：
+                在任意给定时间，要么 只能有一个可变引用，要么 只能有多个不可变引用。
+        引用必须总是有效的。
+                */
+        let mut s = String::from("hello");
+        let r1 = &s; // 没问题
+        let r2 = &s; // 没问题
+        let r3 = &mut s;
+        //下面这句话报错：r1和r2已经不能用了
+        // println!("{}, {}, and {}", r1, r2, r3);
+        // println!("{}", s);//s已经被借出去了，尚未归还
+        println!("{}", r3);
+    }
+
+    #[test]
+    fn two() {
+        let mut s = String::from("hello");
+        let r1 = &s; // 没问题
+        let r2 = &s; // 没问题
+        { //即便是放在一个作用域里面也有问题
+             // let r3 = &mut s;
+        }
+        println!("{}, {}", r1, r2);
+        println!("{}", s); //s已经被借出去了，尚未归还
+    }
+
+    #[test]
     fn basicTypeAssinment() {
         //基础类型的复制ownership不变，而是简单的值复制
         let mut x = 3;
@@ -14,7 +43,7 @@ mod bcOwnership {
     #[test]
     fn variableAssinment() {
         struct Node(i32);
-        let  x = Node(3);
+        let x = Node(3);
         let y = x;
         //下面的语句会报错，因为x的所有权已经交给y了
         // println!("{}", x.0);

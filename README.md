@@ -36,7 +36,7 @@ registry = "git://mirrors.ustc.edu.cn/crates.io-index"
 
 # 三、Rust官方教程
 ## 使用rustup查看本地文档
-安装程序还包括文档的副本存放在本地，可以方便地离线阅读。运行 `rustup doc` 让浏览器上打开本地文档。(译注：自 `Rust Stable 1.14.0 `版本后，Rust 安装程序默认不再自带本地文档，需要添加本地文档的话，需要执行 `rustup component list` 查看 `rust-docs` 是否高亮，若无的话，则需要通过命令手动安装 `rustup component add rust-docs`，装好后 `rustup doc` 就可用了。)
+安装程序rustup还包括文档的副本存放在本地，可以方便地离线阅读。运行 `rustup doc` 在浏览器打开本地文档。(译注：自 `Rust Stable 1.14.0 `版本后，Rust 安装程序默认不再自带本地文档，需要添加本地文档的话，需要执行 `rustup component list` 查看 `rust-docs` 是否高亮，若无的话，则需要通过命令手动安装 `rustup component add rust-docs`，装好后 `rustup doc` 就可用了。)
 
 遇到标准库提供的类型或函数不知道怎么用时，可在 API 文档找到相关的说明。 
 ## Rust教程
@@ -44,8 +44,7 @@ registry = "git://mirrors.ustc.edu.cn/crates.io-index"
 * [Github:Rust例子](https://github.com/rust-lang-cn/rust-by-example-cn)   
 * [Github:Rust之书](https://github.com/rust-lang-cn/book-cn) 另一个中文版Repo：[repo地址](https://github.com/KaiserY/trpl-zh-cn)   
 
-如果想看中文，这里有一份翻译比较完全的文档：
-* 虽然可以直接从官网上学习Rust例子，但是官网网站似乎有点卡，可以把代码克隆下来，使用mdbook自己构建，在本地学习rust。我在自己网站上部署了以上两个文档：
+官网文档阅读似乎有点卡，可以把代码克隆下来，使用mdbook自己构建，在本地学习rust。我在自己网站上部署了以上两个文档：
 * [Rust之书](https://weiyinfu.cn/RustBook/)，也可以从[这里](https://kaisery.github.io/trpl-zh-cn/ch08-02-strings.html) 阅读。
 )
 * [Rust例子](https://weiyinfu.cn/RustExample/)  
@@ -71,8 +70,14 @@ Rust第三方教程质量较差，有的内容比较简略，有的从别处照�
 # 七、Rust调试
 Rust回溯Rust回溯是调用的所有函数的列表，用于了解“导致错误的原因”。 需要设置RUST_BACKTRACE环境变量来获取回溯。
 
-# 八、安全与速度不可兼得
-数组下标越界之后，程序是否应该继续执行？C和C++给出的答案是应该继续执行，它没有数组下标越界的检查，这就使得每次访问数组速度较快。  
+# 八、理解Rust的设计原则
+* Rust语言是一个产品，提出“无垃圾回收、无手动释放”这个原则之后，应该如何实现它？  
+* Rust的错误处理与try-catch方式孰优孰劣？  
+* Java的空指针与Rust的枚举方式孰优孰劣？  
+* Rust有必要搞那么复杂的match吗？制作match的优点有哪些？  
+* Rust的for循环没有传统的三句话形式，这样是进步还是退步？  
+* 为什么生命周期需要暴露给程序员？生命周期只让编译器知道不就可以了吗？
+
 
 # 九、学习路线
 * 看文档，练习使用
