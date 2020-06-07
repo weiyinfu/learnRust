@@ -15,7 +15,7 @@ mod AMVariable {
 
     #[test]
     fn variableRedefine() {
-        //变量重定义
+        //变量重定义，这叫变量shadow（掩蔽）
         let x = 3;
         println!("{}", x);
         let x = "weiyinfu";
@@ -25,10 +25,12 @@ mod AMVariable {
     #[test]
     fn testStruct() {
         struct Node {
-            name: String
+            name: String,
         }
         //如果没有mut就会报错
-        let mut x = Node { name: String::from("weiyinfu") };
+        let mut x = Node {
+            name: String::from("weiyinfu"),
+        };
         x.name = String::from("haha");
         println!("{}", x.name);
     }

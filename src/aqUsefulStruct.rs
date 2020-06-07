@@ -1,5 +1,6 @@
 /*
-Some,Optional,Result等常用数据结构
+Some,Optional,Result等常用结构体
+Optional是一个枚举，它包括Some和None，其中Some是一个元组结构体，None是一个空结构体
 */
 
 use std::fs::File;
@@ -7,8 +8,8 @@ use std::fs::File;
 #[test]
 #[allow(unused_variables)]
 fn optionAndSome() {
-    let x: Option<i32> = Some(10);  // 'T' is of type i32.
-    let x: Option<bool> = Some(true);  // 'T' is of type bool.
+    let x: Option<i32> = Some(10); // 'T' is of type i32.
+    let x: Option<bool> = Some(true); // 'T' is of type bool.
     let x: Option<f64> = Some(10.5); // 'T' is of type f64.
     let x: Option<char> = Some('b'); // 'T' is of type char.
     println!("{}", x.unwrap());
@@ -57,9 +58,7 @@ fn useResult() {
             println!("打开文件成功");
             file
         }
-        Err(error) => {
-            panic!("There was a problem opening the file: {:?}", error)
-        }
+        Err(error) => panic!("There was a problem opening the file: {:?}", error),
     };
 }
 

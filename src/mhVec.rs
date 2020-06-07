@@ -7,7 +7,7 @@ fn createVec() {
     let a = Vec::from("1 2 3 4");
     println!("{:?}", a);
     let a = vec![1, 2, 3, 4, 5];
-    let a = [3; 4];//创建数组，用3填充
+    let a = [3; 4]; //创建数组，用3填充
     let a = vec![3; 4];
     println!("{:?}", a);
 }
@@ -70,10 +70,21 @@ fn update() {
 fn dedup() {
     //消重
     let mut a = vec![1, 1, 2, 2, 3];
-    a.dedup_by(|x, y| { *x == *y });
+    a.dedup_by(|x, y| *x == *y);
     println!("{:?}", a);
     let mut a = vec![1, 1, 2, 2, 3];
-    a.dedup_by_key(|x| { *x });
+    a.dedup_by_key(|x| *x);
+    println!("{:?}", a);
+}
+
+#[test]
+fn dedup2() {
+    //需要注意，dedup之前一定要排好序
+    let mut a = vec![1, 3, 2, 3];
+    a.dedup_by_key(|x| *x);
+    println!("{:?}", a);
+    a.sort();
+    a.dedup_by_key(|x| *x);
     println!("{:?}", a);
 }
 
@@ -85,7 +96,11 @@ fn duckArray() {
         B(f64),
         C(String),
     }
-    let v = vec![Values::A(5), Values::B(10.7), Values::C(String::from("haha"))];
+    let v = vec![
+        Values::A(5),
+        Values::B(10.7),
+        Values::C(String::from("haha")),
+    ];
     for i in v {
         println!("{:?}", i);
     }
@@ -95,7 +110,8 @@ fn duckArray() {
 fn iteratorCollect() {
     let data1 = &[3, 1, 4, 1, 5, 9, 2, 6];
     let data2 = &[2, 7, 1, 8, 2, 8, 1, 8];
-    let numbers: Vec<i32> = data1.iter() // {3, 1, 4...}
+    let numbers: Vec<i32> = data1
+        .iter() // {3, 1, 4...}
         .zip(data2.iter()) // {(3, 2), (1, 7)...}
         .map(|(a, b)| a * b) // {6, 7, ...}
         .filter(|n| *n > 5) // {6, 7....}
@@ -122,4 +138,19 @@ fn createArray() {
     // let n: usize = 10;
     let a = [false; n];
     println!("{:?}", a);
+}
+
+#[test]
+fn binarySearch() {
+    let a = vec![1, 3, 3, 3, 4, 5];
+    //error表示没有找到，但是会返回该元素应该插入的位置
+    let res = a.binary_search(&2);
+    println!("{:?}", res);
+    //ok表示找到了，表示该元素的下界
+    let res = a.binary_search(&4);
+    println!("{:?}", res);
+
+    //ok表示找到了，表示该元素的上确界（闭区间上界）
+    let res = a.binary_search(&3);
+    println!("{:?}", res);
 }

@@ -1,5 +1,7 @@
 use std::sync::Arc;
 /*
+闭包实际上一个一个结构体
+
 如果有move，则定义的时候就发生所有权转移。
 如果没有move，则执行的时候发生所有权转移。
 发生move的时候，如果元素在栈上，则复制一份。外部函数依然保有可读权利。
@@ -52,7 +54,7 @@ fn twotwo() {
 fn four() {
     //一旦声明为move，那么闭包就固定了，不再发生改变
     let mut a = [1, 2, 3];
-    //此处的move是把a复制一份
+    //此处的move是把a复制一份（因为数组a在栈上）
     let check = move || a.iter().sum::<i32>();
     println!("{}", check());
     let mut update = || {

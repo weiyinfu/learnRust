@@ -1,10 +1,11 @@
 use std::ops::Add;
 
+//Rust实现运算符重载
 #[test]
 fn useAdd() {
     #[derive(Debug)]
     struct Node {
-        x: i32
+        x: i32,
     }
     impl Add for Node {
         type Output = Node;

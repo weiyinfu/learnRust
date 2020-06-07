@@ -10,7 +10,7 @@ mod beMove {
 
     //Rust天生移动语义
     #[test]
-    fn moveSematic() {
+    fn returnValue() {
         //不是移动语义：对于结构体和基本类型，只是在栈上发生复制
         fn get() -> Node {
             let y = 0; //y在栈上，占4个字节
@@ -27,7 +27,7 @@ mod beMove {
     }
 
     #[test]
-    fn moveSematicVec() {
+    fn returnPointer() {
         //不是移动语义：对于结构体和基本类型，只是在栈上发生复制
         //vec的指针始终在栈上，vec的指针还是会发生复制。
         fn get() -> Vec<i32> {

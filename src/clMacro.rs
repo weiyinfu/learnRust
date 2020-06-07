@@ -15,6 +15,7 @@ macro_rules! newVec {
 }
 #[test]
 fn newVec() {
+    //宏的定义，既可以使用中括号，又可以使用小括号
     let x = newVec![1, 2, 3, 4];
     println!("{:?}", x);
     let x = newVec!(1, 2, 3, 4);

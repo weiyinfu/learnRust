@@ -1,7 +1,9 @@
+use std::sync::mpsc;
 use std::thread;
 use std::time::Duration;
-use std::sync::mpsc;
-
+/**
+Rust天然支持并发安全
+*/
 #[allow(dead_code)]
 fn spawn_function() {
     for i in 0..5 {
@@ -49,11 +51,10 @@ fn communicate() {
     println!("Got: {}", received);
 }
 
-
 #[test]
 fn sendAndSync() {
-    use std::sync::{Arc, Mutex};
     use std::sync::mpsc;
+    use std::sync::{Arc, Mutex};
     use std::thread;
 
     let data = Arc::new(Mutex::new(0u32));

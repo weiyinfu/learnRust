@@ -49,8 +49,9 @@ mod ADDataTypes {
         let x = 0x23;
         println!("{:x}", x);
         //使用更美观的字面量
-        let x = 0x232_342_34;
-        println!("{:x}", x);
+        let x = 0x2ab_c24;
+        println!("{:x}", x); //十六进制小写
+        println!("{:X}", x); //十六进制大写
     }
 
     #[test]
@@ -74,7 +75,7 @@ mod ADDataTypes {
 
     #[test]
     fn compoundDataType() {
-        //复合数据类型
+        //复合数据类型的大小
         println!("sizeof array={}", size_of_val(&[1, 2, 3u8]));
         println!(
             "sizeof tuple={}=sizeof({})+sizeof({})",
@@ -111,15 +112,18 @@ mod ADDataTypes {
 
     #[test]
     fn useStruct() {
-        //使用结构体，结构体有三种，元组结构体，C结构体，空结构体（只用来表示一种类型）
+        //使用结构体，结构体有三种:元组结构体，C结构体，空结构体（只用来表示一种类型）
         #[derive(Debug)]
+        //元组结构体
         struct TupleStruct(String, i32);
         #[derive(Debug)]
+        //C结构体
         struct CStruct {
             name: String,
             age: i32,
         }
         #[derive(Debug)]
+        //空结构体
         struct EmptyStruct;
         let x = TupleStruct("魏印福".to_string(), 32);
         let y = CStruct {
@@ -212,6 +216,7 @@ mod ADDataTypes {
         let x = "天下大势，为我所控
 哈哈哈
    真好
+Rust的多行字符串最为自然，比JavaScript的``，pyhon的\"\"\"都要自然得多
         ";
         println!("{}", x);
         //单字节字符串

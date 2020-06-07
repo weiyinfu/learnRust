@@ -68,17 +68,14 @@ mod apMatch {
             Color::Red => println!("The color is Red!"),
             Color::Blue => println!("The color is Blue!"),
             Color::Green => println!("The color is Green!"),
-            Color::RGB(r, g, b) =>
-                println!("Red: {}, green: {}, and blue: {}!", r, g, b),
-            Color::HSV(h, s, v) =>
-                println!("Hue: {}, saturation: {}, value: {}!", h, s, v),
-            Color::HSL(h, s, l) =>
-                println!("Hue: {}, saturation: {}, lightness: {}!", h, s, l),
-            Color::CMY(c, m, y) =>
-                println!("Cyan: {}, magenta: {}, yellow: {}!", c, m, y),
-            Color::CMYK(c, m, y, k) =>
-                println!("Cyan: {}, magenta: {}, yellow: {}, key (black): {}!",
-                         c, m, y, k),
+            Color::RGB(r, g, b) => println!("Red: {}, green: {}, and blue: {}!", r, g, b),
+            Color::HSV(h, s, v) => println!("Hue: {}, saturation: {}, value: {}!", h, s, v),
+            Color::HSL(h, s, l) => println!("Hue: {}, saturation: {}, lightness: {}!", h, s, l),
+            Color::CMY(c, m, y) => println!("Cyan: {}, magenta: {}, yellow: {}!", c, m, y),
+            Color::CMYK(c, m, y, k) => println!(
+                "Cyan: {}, magenta: {}, yellow: {}, key (black): {}!",
+                c, m, y, k
+            ),
             // 不需要其它分支，因为所有的情形都已覆盖
         }
     }
@@ -155,6 +152,7 @@ mod apMatch {
             // 相反，在 1 ... 12 分支中绑定匹配值到 `n` 。现在年龄就可以读取了。
             n @ 1..=12 => println!("I'm a child of age {:?}", n),
             n @ 13..=19 => println!("I'm a teen of age {:?}", n),
+            n if n > 20 && n < 25 => println!("I am a man of age {:?}", n),
             // 不符合上面的范围。返回结果。
             n => println!("I'm an old person of age {:?}", n),
         }

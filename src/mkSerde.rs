@@ -1,6 +1,8 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 use serde_json;
-
+/**
+serde是一个序列化库
+*/
 #[derive(Serialize, Deserialize, Debug)]
 struct Point {
     x: i32,

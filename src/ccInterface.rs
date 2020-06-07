@@ -51,7 +51,7 @@ fn first() {
 
 #[test]
 fn traitAsReturnValue() {
-    //在Rust中一个函数只能返回一种类型，虽然可以返回一个接口，但是不能返回不同的类型
+    //在Rust中一个函数只能返回一种类型，虽然可以返回一个接口，但是不能返回不同的类型，Rust不支持多态
     // fn randomShape() -> impl Area {
     //     if random() < 0.5 {
     //         return Circle { radius: random() };

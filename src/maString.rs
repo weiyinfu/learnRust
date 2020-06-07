@@ -1,6 +1,8 @@
 #[cfg(test)]
 #[allow(unused_variables)]
 mod testString {
+    use std::ops::Index;
+
     #[test]
     fn create() {
         let x = String::new();
@@ -30,7 +32,7 @@ mod testString {
         for i in x.chars() {
             println!("{}", i);
         }
-        let y = x.chars();//y是一个iterator
+        let y = x.chars(); //y是一个iterator
         x.insert_str(0, "good");
         println!("{}", x)
     }
@@ -70,7 +72,9 @@ mod testString {
         let mut res = x.split_whitespace();
         loop {
             let op = res.next();
-            if op.is_none() { break; }
+            if op.is_none() {
+                break;
+            }
             let now = op.unwrap();
             println!("{}", now);
         }
@@ -79,16 +83,25 @@ mod testString {
     #[test]
     fn split2vector() {
         //iterator如何映射为vector
-        let mut weight = "07 09 10 05 08 04 02 01 06 03 07 09 10 05 08 04 02".split_whitespace().map(|x| {
-            x.parse::<i32>().unwrap()
-        });
+        let mut weight = "07 09 10 05 08 04 02 01 06 03 07 09 10 05 08 04 02"
+            .split_whitespace()
+            .map(|x| x.parse::<i32>().unwrap());
         let mut a: Vec<i32> = Vec::new();
         loop {
             let now = weight.next();
-            if now.is_none() { break; }
+            if now.is_none() {
+                break;
+            }
             let num = now.unwrap();
             a.push(num);
         }
         println!("{:?}", a);
+    }
+
+    #[test]
+    fn indexOf() {
+        //Rust的字符没有indexOf函数
+        let s = "weiyinfu";
+        println!("{:?}", s.find("ei").unwrap());
     }
 }
