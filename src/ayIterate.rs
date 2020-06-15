@@ -50,7 +50,7 @@ mod ayIterate {
 
     #[test]
     fn fibnaci() {
-        //使用iterater接口实现斐波那契数列
+        //使用iterator接口实现斐波那契数列
         struct Fib(i32, i32);
         impl Iterator for Fib {
             type Item = i32;

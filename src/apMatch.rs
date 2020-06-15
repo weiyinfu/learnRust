@@ -172,6 +172,12 @@ mod apMatch {
             // Match anything else (`None` variant).
             _ => (),
         }
+        let x = Some(3);
+        match x {
+            Some(x) => println!("{}", x),
+            None => println!("it is none"),
+        }
+        let y = x.unwrap();
     }
 
     #[test]

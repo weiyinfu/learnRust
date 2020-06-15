@@ -111,7 +111,14 @@ fn reExport() {
         mod a {
             pub fn f() {}
         }
+
         pub use a::f;
     }
     main::f();
+}
+
+#[test]
+fn useFolderModule() {
+    use crate::useFolder;
+    useFolder::baga();
 }

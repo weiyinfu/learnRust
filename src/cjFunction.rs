@@ -28,6 +28,16 @@ fn diverge() {
 }
 
 #[test]
+fn emptyTuple() {
+    fn some_fn() {
+        ()
+    }
+
+    let a: () = some_fn();
+    println!("This function returns and you can see this line.")
+}
+
+#[test]
 fn highOrderFunction() {
     fn add_one(x: i32) -> i32 {
         x + 1
@@ -68,4 +78,22 @@ fn highOrderFunction() {
     let z1 = apply(add_num, 2);
     let z2 = apply(translate, 2);
     println!("{}, {}, {}", z0, z1, z2);
+}
+
+#[test]
+fn test_mut_param() {
+    //下面函数参数中的mut是复制了一份数据
+    fn haha(mut x: i32) {
+        x = 4;
+    }
+    fn f(mut a: Vec<i32>) {
+        a[0] = 10;
+    }
+
+    let x = 3;
+    haha(x);
+    println!("{}", x);
+    let a = vec![1, 2, 3];
+    //在调用f的时候发生move，a对象在下文中禁止再用
+    f(a);
 }

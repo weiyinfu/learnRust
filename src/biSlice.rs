@@ -45,3 +45,25 @@ mod biSlice {
         }
     }
 }
+
+#[test]
+fn contains() {
+    //判断一个元素位于某个区间
+    println!("{}", (1..3).contains(&2));
+    println!("{}", (1..3).contains(&3));
+    println!("{}", (1..=3).contains(&3));
+}
+
+#[test]
+fn s() {
+    //任意数组的slice，是&[T]类型
+    fn f(a: &[i32]) -> i32 {
+        //&[T]这种方式既可以接受数组又可以接受vec
+        a.iter().sum()
+    }
+    let a = vec![1, 2, 3, 4];
+    let b = [1, 2, 3, 4];
+    println!("{}", f(&a));
+    println!("{}", f(&b));
+    let cc = &a[..];
+}

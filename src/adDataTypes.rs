@@ -278,3 +278,11 @@ fn demo() {
     }
     let bar: fn(i32) -> i32 = foo;
 }
+
+#[test]
+fn reverse() {
+    //Rust没有取反操作~，只能使用其它操作替代，一种是负数减一，一种是异或
+    let x = 3;
+    println!("{:b}", -x - 1);
+    println!("{:b}", x ^ -1);
+}

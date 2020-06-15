@@ -10,7 +10,7 @@ use std::fmt::Debug;
 use std::io::Read;
 use std::path::Display;
 
-trait Area {
+trait Area: Sized {
     fn area(&self) -> f64;
 }
 
@@ -47,6 +47,19 @@ fn first() {
         width: 1.2f64,
         height: 1.3f64,
     });
+}
+
+#[test]
+fn second() {
+    // let a: Vec<dyn Area> = vec![
+    //     Circle { radius: 2.0f64 },
+    //     Rectangle {
+    //         width: 1.2f64,
+    //         height: 1.3f64,
+    //     },
+    // ];
+    // println!("{}", a[0].area());
+    // println!("{}", a[1].area());
 }
 
 #[test]
@@ -237,53 +250,6 @@ fn twoTrait2() {
     }
 
     <Test as Trait1>::foo()
-}
-
-#[test]
-#[allow(unused_variables)]
-fn genericTrait() {
-    //泛型trait的两种方式
-    mod one {
-        // use generic parameters
-        pub trait Graph<N, E> {
-            fn has_edge(&self, startNode: &N, endNode: &N) -> bool;
-            fn edges(&self, node: &N) -> Vec<E>;
-        }
-
-        fn distance<N, E, G: Graph<N, E>>(graph: &G, start: &N, end: &N) -> u32 {
-            0
-        }
-    }
-    mod two {
-        // use associated types
-        pub(crate) trait Graph {
-            type N;
-            type E;
-
-            fn has_edge(&self, start: &Self::N, end: &Self::N) -> bool;
-            fn edges(&self, node: &Self::N) -> Vec<Self::E>;
-        }
-
-        fn distance<G: Graph>(graph: &G, start: &G::N, end: &G::N) -> u32 {
-            0
-        }
-    }
-    use two::*;
-    struct Node;
-    struct Edge;
-    struct SimpleGraph;
-    impl Graph for SimpleGraph {
-        type N = Node;
-        type E = Edge;
-        fn has_edge(&self, n1: &Node, n2: &Node) -> bool {
-            false
-        }
-        fn edges(&self, n: &Node) -> Vec<Edge> {
-            Vec::new()
-        }
-    }
-    let graph = SimpleGraph;
-    let object = Box::new(graph) as Box<dyn Graph<N = Node, E = Edge>>;
 }
 
 #[test]

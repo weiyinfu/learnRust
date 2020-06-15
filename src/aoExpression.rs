@@ -28,14 +28,9 @@ mod AWExpression {
     fn ifBlock() {
         //使用if语句块作为表达式
         let x = 3;
-        let y = if x < 5 {
-            7
-        } else {
-            8
-        };
+        let y = if x < 5 { 7 } else { 8 };
         println!("{}", y);
     }
-
 
     #[test]
     fn useLoop() {
@@ -74,7 +69,6 @@ mod AWExpression {
         println!("Exited the outer loop");
     }
 
-
     #[test]
     fn useFor() {
         let mut s = 0;
@@ -85,7 +79,7 @@ mod AWExpression {
                 x = i;
                 break;
             }
-        };
+        }
         println!("{}", x);
     }
 
@@ -97,5 +91,23 @@ mod AWExpression {
             s += i;
         }
         println!("{}", s);
+        for i in (1..10).rev() {
+            println!("{}", i);
+        }
     }
+}
+
+#[test]
+fn testBlock() {
+    fn f() -> i32 {
+        let x = {
+            if 1 < 2 {
+                //此处的return是整个函数的return，所以Rust提出语句块中可以省略return，表示退出语句块，这个设计我认为是非常优雅美观的。
+                return 4;
+            }
+        };
+        println!("hello");
+        return 2;
+    }
+    f();
 }

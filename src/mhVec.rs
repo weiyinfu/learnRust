@@ -9,6 +9,8 @@ fn createVec() {
     let a = vec![1, 2, 3, 4, 5];
     let a = [3; 4]; //创建数组，用3填充
     let a = vec![3; 4];
+    let a: Vec<i32> = (0..10).collect();
+    let a = vec![vec![3; 4]];
     println!("{:?}", a);
 }
 
@@ -153,4 +155,22 @@ fn binarySearch() {
     //ok表示找到了，表示该元素的上确界（闭区间上界）
     let res = a.binary_search(&3);
     println!("{:?}", res);
+}
+
+#[test]
+fn use_equal() {
+    let x: Vec<char> = "abc".to_string().chars().collect();
+    let y: Vec<char> = "abc".to_string().chars().collect();
+    println!("{}", x == y)
+}
+
+#[test]
+fn search() {
+    let a = vec![1, 2, 3, 3, 7];
+    let b = a.binary_search(&5);
+    let c = a.binary_search(&10);
+    let d = a[3..].binary_search(&7);
+    println!("{}", d.unwrap());
+    let k = d.unwrap();
+    //如果没有找到会返回error
 }

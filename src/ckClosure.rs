@@ -1,6 +1,7 @@
 use std::sync::Arc;
+
 /*
-闭包实际上一个一个结构体
+闭包实际上是一个结构体
 
 如果有move，则定义的时候就发生所有权转移。
 如果没有move，则执行的时候发生所有权转移。
@@ -68,7 +69,7 @@ fn four() {
 
 #[test]
 fn five() {
-    //栈中变量的move会使元素变成只读
+    //栈中变量的move，把元素复制一份
     let mut a = 1;
     let check = move || a;
     a += 1;
@@ -114,7 +115,7 @@ fn eight() {
     let mut a = 1;
     let mut add = || a += 1;
     add();
-    //下面a+=1和add()只能执行其中一句
+    //下面a+=1和add()只能执行其中一句，因为add是写借用，a.add_assign(&mut self)也是写借用
     a += 1;
     //再次借用就会报错
     // add();
@@ -127,18 +128,18 @@ fn eightEight() {
     let mut a = vec![1];
     let mut add = || a[0] += 1;
     //下面两句话顺序反了就会报错
-    a[0] += 1;
+    // a[0] += 1;
     //再次借用就会报错
-    // add();
+    add();
     println!("{:?}", a);
 }
 
 #[test]
 fn nine() {
     let mut a = vec![1];
-    a[0] += 1;
     let mut add = || a[0] += 1;
-    add();
+    a[0] += 1;
+    // add();
     println!("{:?}", a);
 }
 
@@ -220,10 +221,10 @@ mod ThreeFn {
 }
 
 #[cfg(test)]
-mod baga {
-
+mod Factorial {
+    //使用闭包实现递归调用
     #[test]
-    fn factorial() {
+    fn useLocalFunction() {
         fn fac(x: i32) -> i32 {
             if x == 0 {
                 return 1;
@@ -244,7 +245,7 @@ mod baga {
     //     println!(fac(fac, 3));
     // }
     #[test]
-    fn strange() {
+    fn useClosure() {
         /**
         因为闭包函数无法实现递归，所以只能使用结构体实现递归
         */
@@ -259,7 +260,7 @@ mod baga {
     }
 
     #[test]
-    fn strange2() {
+    fn secondClosureFactorial() {
         /**
         因为闭包函数无法实现递归，所以只能使用结构体实现递归
         */
@@ -278,14 +279,68 @@ mod baga {
 
         (fact.f)(&fact, 5, 1);
     }
+}
 
-    /*
-    下面这种方式也是错误的。
-    */
-    // #[test]
-    // fn useVariable() {
-    //     let mut fac = |x: i32| { 0 };
-    //     fac = |x: i32| { if x == 0 { 1 } else { x * fac(x - 1) } };
-    //     println!("{}", fac(5));
-    // }
+#[test]
+fn closureAsParameter() {
+    // 定义一个函数，可以接受一个由 `Fn` 限定的泛型 `F` 参数并调用它。
+    fn call_me<F: Fn()>(f: F) {
+        f()
+    }
+
+    // 定义一个满足 `Fn` 约束的封装函数（wrapper function）。
+    fn function() {
+        println!("I'm a function!");
+    }
+
+    // 定义一个满足 `Fn` 约束的闭包。
+    let closure = || println!("I'm a closure!");
+
+    call_me(closure);
+    call_me(function);
+}
+
+#[test]
+fn returnAClosure() {
+    //返回一个闭包函数
+    fn create_fn() -> impl Fn() {
+        let text = "Fn".to_owned();
+
+        move || println!("This is a: {}", text)
+    }
+
+    fn create_fnmut() -> impl FnMut() {
+        let text = "FnMut".to_owned();
+
+        move || println!("This is a: {}", text)
+    }
+
+    let fn_plain = create_fn();
+    let mut fn_mut = create_fnmut();
+
+    fn_plain();
+    fn_mut();
+}
+
+#[test]
+fn useClosure() {
+    //在实际工作中使用闭包
+    let a = vec![1, 2, 3, 4, 5];
+    println!("{:?}", a.iter().filter(|x| **x > 3));
+    println!("{:?}", a.iter().any(|x| *x > 3));
+}
+
+#[test]
+fn manyClosure() {
+    let mut x = Box::new(3);
+    let mut a = || {
+        let b = || {
+            println!("{}", *x);
+        };
+        //下面两句调换顺序就会报错
+        b();
+        *x += 3;
+    };
+    a();
+    println!("{}", *x);
 }

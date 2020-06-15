@@ -140,3 +140,41 @@ fn someValue() {
         println!("yes");
     }
 }
+
+#[test]
+fn ifLetStruct() {
+    /**
+    解构是Rust的基本特性，被解构的对象不仅仅可以是枚举，也可以是结构体
+    */
+    struct Node {
+        value: i32,
+    }
+    let x = Node { value: 4 };
+    if let Node { value } = x {
+        println!("{}", value);
+    }
+    match x {
+        Node { value: 3 } => println!("value is 3"),
+        Node { value } => println!("value is {}", value),
+        //因为上面已经穷尽了所有情况，所以，即是没有下面这句话也不会报错
+        // _ => println!("it is none"),
+    }
+}
+
+#[test]
+fn ifLetTupleStruct() {
+    /**
+    解构是Rust的基本特性，被解构的对象不仅仅可以是枚举，也可以是结构体
+    */
+    struct Node(i32);
+    let x = Node(4);
+    if let Node(value) = x {
+        println!("{}", value);
+    }
+    match x {
+        Node(3) => println!("value is 3"),
+        Node(value) => println!("value is {}", value),
+        //下面这个分支永远不会执行到
+        Node(3) => println!("value is 3"),
+    }
+}

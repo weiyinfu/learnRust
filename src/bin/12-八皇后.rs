@@ -7,7 +7,7 @@ fn legal(x: i32, y: i32) -> bool {
     x >= 0 && y >= 0 && x < n as i32 && y < n as i32
 }
 
-fn canput(a: &mut [[i32; n]; n], x: usize, y: usize) -> bool {
+fn canput(a: &[[i32; n]; n], x: usize, y: usize) -> bool {
     for (dx, dy) in [(0, 1), (1, 0), (1, 1), (1i32, -1i32)].iter() {
         for direction in [1, -1].iter() {
             let mut xx = x as i32;

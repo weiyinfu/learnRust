@@ -69,3 +69,14 @@ mod beMove {
         println!("address of y:{}", addr(&y));
     }
 }
+
+#[test]
+fn changeMutabilityInMove() {
+    //在移动过程中改变可变性
+    let x = Box::new(3);
+    let mut y = x;
+    *y = 4;
+    //x不能再访问了
+    // println!("{}", *x);
+    println!("{}", y);
+}

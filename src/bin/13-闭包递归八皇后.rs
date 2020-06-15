@@ -40,24 +40,24 @@ fn main() {
     struct Go<'s> {
         go: &'s dyn Fn(&Go, usize, usize),
     }
-    // let go = Go {
-    //     go: &|g, x, y| {
-    //         if x == n {
-    //             show();
-    //             return;
-    //         }
-    //         if y == n {
-    //             (g.go)(&g, x + 1, 0);
-    //             return;
-    //         }
-    //         if canput(&x, &y) {
-    //             a[x][y] = 1;
-    //             (g.go)(g, x, y + 1);
-    //             a[x][y] = 0;
-    //         }
-    //         let gg = g.go;
-    //         gg(g, x, y + 1);
-    //     },
-    // };
-    // (go.go)(&go, 0, 0);
+    let go = Go {
+        go: &|g, x, y| {
+            if x == n {
+                show();
+                return;
+            }
+            if y == n {
+                (g.go)(&g, x + 1, 0);
+                return;
+            }
+            if canput(&x, &y) {
+                a[x][y] = 1;
+                (g.go)(g, x, y + 1);
+                a[x][y] = 0;
+            }
+            let gg = g.go;
+            gg(g, x, y + 1);
+        },
+    };
+    (go.go)(&go, 0, 0);
 }

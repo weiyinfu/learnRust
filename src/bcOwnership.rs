@@ -93,3 +93,35 @@ mod bcOwnership {
         // println!("a : {}", a);
     }
 }
+
+#[test]
+fn freeze() {
+    //如果把读引用借用出去了，那么就禁止对原来的数据进行修改
+    let mut _mutable_integer = 7i32;
+
+    {
+        // 借用 `_mutable_integer`
+        let large_integer = &_mutable_integer;
+
+        // 报错！`_mutable_integer` 在本作用域被冻结
+        // _mutable_integer = 50;
+        // 改正 ^ 注释掉此行
+
+        println!("Immutably borrowed {}", large_integer);
+
+        // `large_integer` 离开作用域
+    }
+
+    // 正常运行！`_mutable_integer` 在这作用域没有冻结
+    _mutable_integer = 3;
+}
+
+#[test]
+fn refKeyword() {
+    //ref关键字,ref关键字只是写起来比较美观，它完全是可有可无的东西
+    let mut x = 3;
+    let ref y = x;
+    let z = &x;
+    let ref mut a = x;
+    // let mut ref rea = x;
+}

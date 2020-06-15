@@ -78,3 +78,33 @@ fn useResult2() {
         }
     }
 }
+
+#[test]
+fn use_take() {
+    let mut head = Some(Box::new(3));
+    let mut p = &mut head;
+    let x = p.take();
+    println!("{}", head.is_none());
+}
+
+#[test]
+fn cannot_use_unwrap() {
+    let mut head = Some(Box::new(3));
+    let mut p = &mut head;
+    // let x = p.unwrap();
+    //unwrap的参数是self，一定会发生move
+}
+
+#[test]
+fn use_box() {
+    use std::ops::{Deref, DerefMut};
+    let mut x = Box::new(1);
+    let mut y = x.to_owned();
+    *y = 3;
+    println!("{}", *x);
+    let x = Some(Box::new(1));
+    let mut y = x.to_owned();
+    let z = y.as_deref_mut().unwrap();
+    *z = 10;
+    println!("{}", x.unwrap());
+}
