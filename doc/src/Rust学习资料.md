@@ -29,3 +29,11 @@ Rust第三方教程质量较差，有的内容比较简略，有的从别处照�
 # 三、Rust社区
 * [知乎Rust专栏](https://www.zhihu.com/search?q=rust&type=column)
 * [Rust中文社区](https://rustcc.cn/)
+
+# 四、寻找crates
+## crates.io
+官方crates网站  
+[https://crates.io/](https://crates.io/)
+## lib.rs
+这个网站提供了crates的丰富的检索功能，可以在这个网站上寻找crates。  
+[https://lib.rs/](https://lib.rs/)

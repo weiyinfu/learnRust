@@ -28,6 +28,16 @@ fn diverge() {
 }
 
 #[test]
+fn deconstruct_in_arguments() {
+    fn print_coordinates(&(x, y): &(i32, i32)) {
+        println!("Current location: ({}, {})", x, y);
+    }
+
+    let point = (3, 5);
+    print_coordinates(&point);
+}
+
+#[test]
 fn emptyTuple() {
     fn some_fn() {
         ()

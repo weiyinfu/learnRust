@@ -1,5 +1,7 @@
 /**
 好难，如何调通这个程序
+
+此程序编译不过，不可运行
 */
 #[allow(non_upper_case_globals, dead_code, unused_variables, unused_mut)]
 fn main() {

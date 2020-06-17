@@ -4,6 +4,8 @@ use chrono::Local;
 
 /**
 百思不得解：为啥线性筛比普通筛慢很多？
+
+如果使用release版进行运行，则线性筛法比暴力方法快很多。大概是因为dev版没有进行各种优化导致二者差异不太明显。
 */
 pub fn linearPrime(n: usize) -> Vec<bool> {
     let mut a = Vec::<bool>::new();

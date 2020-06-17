@@ -10,7 +10,7 @@ use std::fmt::Debug;
 use std::io::Read;
 use std::path::Display;
 
-trait Area: Sized {
+trait Area {
     fn area(&self) -> f64;
 }
 
@@ -51,15 +51,17 @@ fn first() {
 
 #[test]
 fn second() {
-    // let a: Vec<dyn Area> = vec![
-    //     Circle { radius: 2.0f64 },
-    //     Rectangle {
-    //         width: 1.2f64,
-    //         height: 1.3f64,
-    //     },
-    // ];
-    // println!("{}", a[0].area());
-    // println!("{}", a[1].area());
+    //Rust的多态
+    let a: Vec<Box<dyn Area>> = vec![
+        Box::new(Circle { radius: 2.0f64 }),
+        Box::new(Rectangle {
+            width: 1.2f64,
+            height: 1.3f64,
+        }),
+    ];
+    for i in a.iter() {
+        println!("{}", i.area());
+    }
 }
 
 #[test]
