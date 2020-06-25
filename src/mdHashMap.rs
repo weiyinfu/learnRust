@@ -96,7 +96,7 @@ mod testHashMap {
         scores.insert(String::from("Blue"), 10);
 
         //entry函数返回一个Enum，它有一个or_insert函数用于插入，entry提供了避免重复插入的一种简单写法
-        scores.entry(String::from("Yellow")).or_insert(50);
+        let x = scores.entry(String::from("Yellow")).or_insert(50);
         scores.entry(String::from("Blue")).or_insert(50);
 
         println!("{:?}", scores);
